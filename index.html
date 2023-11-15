@@ -96,44 +96,50 @@
     <div class="e-content article-entry" itemprop="articleBody">
       
         <p>1.打开浏览器，进入百度图片，搜索想要的内容，比如”马嘉祺”，就会出现很多他的图片</p>
-<p>随便点进去一张，右键,”检查“，点击”网络“，刷新一下，就会看到很多信息，又因为这个网页是动态网页，所以要勾选“XHR”，筛选出动态网页。点击“预览”，我们爬取某张图片时，就要寻找这张图片的url,寻找寻找，可以在左边第二行的预览中的data下看到有0-30<img src="/2023/11/15/%E7%88%AC%E8%99%AB%E7%99%BE%E5%BA%A6%E5%9B%BE%E7%89%87/Users/lilelel\Desktop\34.png" style="zoom:67%;">打开0，发现第一张图片下面有“hoverURL”和”middleURL”等，通过观察，可以发现它们俩是一样的</p>
+<p>随便点进去一张，右键,”检查“，点击”网络“，刷新一下，就会看到很多信息，又因为这个网页是动态网页，所以要勾选“XHR”，筛选出动态网页。点击“预览”，我们爬取某张图片时，就要寻找这张图片的url,寻找寻找，可以在左边第二行的预览中的data下看到有0-30</p>
+<p>打开0，发现第一张图片下面有“hoverURL”和”middleURL”等，通过观察，可以发现它们俩是一样的</p>
 <img src="/2023/11/15/%E7%88%AC%E8%99%AB%E7%99%BE%E5%BA%A6%E5%9B%BE%E7%89%87/img/11.png" style="zoom:50%;">
 
-<p>复制hoverURL,打开新窗口，粘贴刚才的hoverURL,就是刚才的那张图片，<img src="/2023/11/15/%E7%88%AC%E8%99%AB%E7%99%BE%E5%BA%A6%E5%9B%BE%E7%89%87/Users/lilelel\Desktop\12.png" style="zoom:50%;"></p>
+<p>复制hoverURL,打开新窗口，粘贴刚才的hoverURL,就是刚才的那张图片，</p>
+<img src="/2023/11/15/%E7%88%AC%E8%99%AB%E7%99%BE%E5%BA%A6%E5%9B%BE%E7%89%87/img/12.png" style="zoom:50%;">
+
 <p>复制1下面的“hover URL”，再打开，发现就是第二张图片，说明0-29就是30张图片，我们今天要爬的就是这30张图片</p>
 <p>2.打开pycharm,同步，用import导入requests,请求</p>
 <p>复制预览中的请求url,将他赋值给一个叫url的变量</p>
-<p>因为这里的请求方法是get,所以我们用request.get.（url）将url传进去<img src="/2023/11/15/%E7%88%AC%E8%99%AB%E7%99%BE%E5%BA%A6%E5%9B%BE%E7%89%87/Users/lilelel\Desktop\13.png" style="zoom:50%;"></p>
+<p>因为这里的请求方法是get,所以我们用request.get.（url）将url传进去</p>
+<img src="/2023/11/15/%E7%88%AC%E8%99%AB%E7%99%BE%E5%BA%A6%E5%9B%BE%E7%89%87/img/13.png" style="zoom:50%;">
+
 <p>复制User-Agent中的内容 到headers&#x3D;{ }中，以Mozilla&#x2F;5.0 (Windows NT 10.0; Win64; x64)请求，否则会被网站认为是爬虫</p>
-<img src="/2023/11/15/%E7%88%AC%E8%99%AB%E7%99%BE%E5%BA%A6%E5%9B%BE%E7%89%87/Users/lilelel\Desktop\14.png" style="zoom:50%;">
+<img src="/2023/11/15/%E7%88%AC%E8%99%AB%E7%99%BE%E5%BA%A6%E5%9B%BE%E7%89%87/img/14.png" style="zoom:50%;">
 
 <p>把headers传进request.get，以response接收</p>
-<img src="/2023/11/15/%E7%88%AC%E8%99%AB%E7%99%BE%E5%BA%A6%E5%9B%BE%E7%89%87/Users/lilelel\Desktop\15.png" style="zoom:50%;">
+<img src="/2023/11/15/%E7%88%AC%E8%99%AB%E7%99%BE%E5%BA%A6%E5%9B%BE%E7%89%87/img/15.png" style="zoom:50%;">
 
 <p>打印接收到的状态码，发现是200，就是成功的意思</p>
-<img src="/2023/11/15/%E7%88%AC%E8%99%AB%E7%99%BE%E5%BA%A6%E5%9B%BE%E7%89%87/Users/lilelel\Desktop\16.png" style="zoom:50%;">
+<img src="/2023/11/15/%E7%88%AC%E8%99%AB%E7%99%BE%E5%BA%A6%E5%9B%BE%E7%89%87/img/16.png" style="zoom:50%;">
 
-<p>观察网页的预览，发现data下很整齐，这就是一种json文件，打印得到请求的json,发现就是预览中的信息<img src="/2023/11/15/%E7%88%AC%E8%99%AB%E7%99%BE%E5%BA%A6%E5%9B%BE%E7%89%87/Users/lilelel\Desktop\17.png" style="zoom:50%;"></p>
-<img src="/2023/11/15/%E7%88%AC%E8%99%AB%E7%99%BE%E5%BA%A6%E5%9B%BE%E7%89%87/Users/lilelel\Desktop\18.png" style="zoom:50%;">
+<p>观察网页的预览，发现data下很整齐，这就是一种json文件，打印得到请求的json,发现就是预览中的信息</p>
+<img src="/2023/11/15/%E7%88%AC%E8%99%AB%E7%99%BE%E5%BA%A6%E5%9B%BE%E7%89%87/img/17.png" style="zoom:50%;">
+
+<img src="/2023/11/15/%E7%88%AC%E8%99%AB%E7%99%BE%E5%BA%A6%E5%9B%BE%E7%89%87/img/18.png" style="zoom:50%;">
 
 
 
-<p>打印data,就会出现url，点进第一个url,就是第一张图片，往后点击第二个url,就是第二张图片<img src="/2023/11/15/%E7%88%AC%E8%99%AB%E7%99%BE%E5%BA%A6%E5%9B%BE%E7%89%87/Users/lilelel\Desktop\19.png" style="zoom:50%;"></p>
+<p>打印data,就会出现url，点进第一个url,就是第一张图片，往后点击第二个url,就是第二张图片</p>
 <p>我们现在要做的就是用一个for循环把这30张图片都爬下来,</p>
 <p>用变量接收data,比如p_url</p>
 <p>用i接收p_url,打印i发现i就是每一个url<img src="/2023/11/15/%E7%88%AC%E8%99%AB%E7%99%BE%E5%BA%A6%E5%9B%BE%E7%89%87/Users/lilelel\Desktop\21.png" style="zoom:50%;"></p>
 <p>用同样的方法请求url,res接收url</p>
 <p>with open 第一个是文件的名字,第二个是写入方式，图片是wb</p>
 <p>文件的名字，openin打开路径，新建一个”百度图片”的文件夹，因为每个的url的前几位是不一样的，所以以这几位命名,以jepg结尾</p>
-<img src="/2023/11/15/%E7%88%AC%E8%99%AB%E7%99%BE%E5%BA%A6%E5%9B%BE%E7%89%87/Users/lilelel\Desktop\22.png" style="zoom:50%;">
-
+<p><img src="/../img/22.png"></p>
 <p>在百度图片这个文件夹里就可以看到了</p>
-<img src="/2023/11/15/%E7%88%AC%E8%99%AB%E7%99%BE%E5%BA%A6%E5%9B%BE%E7%89%87/Users/lilelel\Desktop\23.png" style="zoom:50%;">
+<p><img src="/../img/23.png"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/11/15/%E7%88%AC%E8%99%AB%E7%99%BE%E5%BA%A6%E5%9B%BE%E7%89%87/" data-id="clp01usao00027sw8hx6qce5c" data-title="爬虫百度图片" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2023/11/15/%E7%88%AC%E8%99%AB%E7%99%BE%E5%BA%A6%E5%9B%BE%E7%89%87/" data-id="clp024y0t0002yww8edfs1anl" data-title="爬虫百度图片" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -173,7 +179,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/11/15/My-New-Post/" data-id="clp01usak00007sw8bwlscbdu" data-title="My New Post" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2023/11/15/My-New-Post/" data-id="clp024y0p0000yww888aj5v1n" data-title="My New Post" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -224,7 +230,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2023/11/05/hello-world/" data-id="clp01usan00017sw84fbianks" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2023/11/05/hello-world/" data-id="clp024y0s0001yww8dgde896o" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
